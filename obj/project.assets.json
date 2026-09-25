@@ -241,11 +241,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\computerScienceProjects\\IceCream\\IceCream.csproj",
+      "projectUniqueName": "C:\\computerScienceProjects\\CarSorter\\IceCream\\IceCream.csproj",
       "projectName": "IceCream",
-      "projectPath": "C:\\computerScienceProjects\\IceCream\\IceCream.csproj",
+      "projectPath": "C:\\computerScienceProjects\\CarSorter\\IceCream\\IceCream.csproj",
       "packagesPath": "C:\\Users\\bwaje\\.nuget\\packages\\",
-      "outputPath": "C:\\computerScienceProjects\\IceCream\\obj\\",
+      "outputPath": "C:\\computerScienceProjects\\CarSorter\\IceCream\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bwaje\\AppData\\Roaming\\NuGet\\NuGet.Config",
