@@ -9,7 +9,7 @@ public partial class Form1 : Form
     void SetFlavorPrices()
     {
         var database = client.GetDatabase("IceCream");
-        var collection = database.GetCollection<BsonDocument>("Prices");
+        var collection = database.GetCollection<FlavorPrices>("Prices");
         var document = new FlavorPrices 
         {
             Price = 1.99,
@@ -20,11 +20,11 @@ public partial class Form1 : Form
     void SetToppingPrices()
     {
         var database = client.GetDatabase("IceCream");
-        var collection = database.GetCollection<BsonDocument>("Prices");
+        var collection = database.GetCollection<ToppingPrices>("Prices");
         var document = new ToppingPrices 
         {
             Price = 1.99,
-            Flavor = "GramCrackers",
+            Topping = "GramCrackers",
         };
         collection.InsertOne(document); 
     }

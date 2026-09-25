@@ -6,7 +6,7 @@ public class FlavorPrices
 {
     public ObjectId Id { get; set; }
     public double Price { get; set; }
-    public string Flavor { get; set; }
+    public required string Flavor { get; set; }
 }
 
 public class ToppingPrices
