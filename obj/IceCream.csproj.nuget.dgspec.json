@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\computerScienceProjects\\CarSorter\\IceCream\\IceCream.csproj": {}
+    "C:\\Users\\newje\\Documents\\GitHub\\IceCream\\IceCream.csproj": {}
   },
   "projects": {
-    "C:\\computerScienceProjects\\CarSorter\\IceCream\\IceCream.csproj": {
+    "C:\\Users\\newje\\Documents\\GitHub\\IceCream\\IceCream.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\computerScienceProjects\\CarSorter\\IceCream\\IceCream.csproj",
+        "projectUniqueName": "C:\\Users\\newje\\Documents\\GitHub\\IceCream\\IceCream.csproj",
         "projectName": "IceCream",
-        "projectPath": "C:\\computerScienceProjects\\CarSorter\\IceCream\\IceCream.csproj",
-        "packagesPath": "C:\\Users\\bwaje\\.nuget\\packages\\",
-        "outputPath": "C:\\computerScienceProjects\\CarSorter\\IceCream\\obj\\",
+        "projectPath": "C:\\Users\\newje\\Documents\\GitHub\\IceCream\\IceCream.csproj",
+        "packagesPath": "C:\\Users\\newje\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\newje\\Documents\\GitHub\\IceCream\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bwaje\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\newje\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
