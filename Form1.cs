@@ -1,6 +1,4 @@
 namespace IceCream;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;  
 using MongoDB.Driver;
 using IceCream.Data;
 public partial class Form1 : Form
@@ -13,7 +11,7 @@ public partial class Form1 : Form
         var document = new FlavorPrices 
         {
             Price = 1.99,
-            Flavor = "Vanilla",
+            Flavor = "",
         };
         collection.InsertOne(document);
     }
@@ -32,5 +30,11 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
+        Load += Form1_Load;
+    }
+    private void Form1_Load(object? sender, EventArgs e)
+    {
+        SetFlavorPrices();
+        SetToppingPrices();
     }
 }
