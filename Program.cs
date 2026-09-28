@@ -13,7 +13,11 @@ static class Program
         ApplicationConfiguration.Initialize();
         Application.Run(new Form1());
 <<<<<<< HEAD
+<<<<<<< HEAD
     }     
+=======
+    }    
+>>>>>>> parent of 0520241 (conected to database)
 =======
     }    
 >>>>>>> parent of 0520241 (conected to database)
