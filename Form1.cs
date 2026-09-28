@@ -31,6 +31,14 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         Load += Form1_Load;
+        var Message = new Label
+        {
+            Text = "Test Text",
+            AutoSize = true,
+            Location = new Point(30, 30),
+            Font = new Font("SansSerif", 16),
+        };
+        Controls.Add(Message);
     }
     private void Form1_Load(object? sender, EventArgs e)
     {
