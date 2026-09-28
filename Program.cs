@@ -15,7 +15,11 @@ static class Program
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     }     
+=======
+    }    
+>>>>>>> parent of 0520241 (conected to database)
 =======
     }    
 >>>>>>> parent of 0520241 (conected to database)
