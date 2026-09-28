@@ -11,7 +11,7 @@ public partial class Form1 : Form
         var document = new FlavorPrices 
         {
             Price = 1.99,
-            Flavor = "",
+            Flavor = "Vanilla",
         };
         collection.InsertOne(document);
     }
