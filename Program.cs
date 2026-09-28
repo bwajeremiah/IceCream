@@ -1,8 +1,5 @@
 namespace IceCream;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;  
-using MongoDB.Driver;
-using IceCream.Data;
+
 static class Program
 {
     /// <summary>
@@ -15,5 +12,9 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         Application.Run(new Form1());
+<<<<<<< HEAD
     }     
+=======
+    }    
+>>>>>>> parent of 0520241 (conected to database)
 }
