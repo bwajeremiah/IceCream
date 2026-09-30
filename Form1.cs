@@ -26,53 +26,6 @@ public partial class Form1 : Form
         };
         collection.InsertOne(document); 
     }
-    void Setcone()
-    {
-        var database = client.GetDatabase("IceCream");
-        var collection = database.GetCollection<ConePrices>("Cones");
-        var document = new ConePrices
-        {
-            Price = 2.99,
-            ConeType = "SprinkeledWaffleCone"
-        };
-        collection.InsertOne(document);
-          var document1 = new ConePrices
-        {
-            Price = 2.99,
-            ConeType = "ChocolateDippedWaffleCone"
-        };
-        collection.InsertOne(document1);
-          var document2 = new ConePrices
-        {
-            Price = 2.99,
-            ConeType = "SprinkledWaffleBowl"
-        };
-        collection.InsertOne(document2);
-          var document3 = new ConePrices
-        {
-            Price = 2.99,
-            ConeType = "ChocolateDippedWaffleBowl"
-        };
-        collection.InsertOne(document3);
-           var document4 = new ConePrices
-        {
-            Price = 1.709,
-            ConeType = "PlainWaffleCone"
-        };
-        collection.InsertOne(document4);
-           var document5 = new ConePrices
-        {
-            Price = 1.709,
-            ConeType = "PlainWaffleBowl"
-        };
-        collection.InsertOne(document5);
-        var document6 = new ConePrices
-        {
-            Price = 1.709,
-            ConeType = "NoConeOrBowl(Paperbowl)"
-        };
-        collection.InsertOne(document6);
-    }
     public Form1()
     {
         InitializeComponent();
@@ -85,9 +38,47 @@ public partial class Form1 : Form
             Font = new Font("SansSerif", 16),
         };
         Controls.Add(Message);
+        TextBox flavorBox = new TextBox
+        {
+            Location = new Point(30, 60),
+            Size = new Size(200, 30),
+            Text = "Enter flavor",
+        };
+        Controls.Add(flavorBox);
+        Button setFlavorButton = new Button
+        {
+            Location = new Point(30, 100),
+            Size = new Size(200, 30),
+            Text = "Set Flavor"
+        };
+        Controls.Add(setFlavorButton);
+        setFlavorButton.Click += (sender, e) => // i dont know what  "(sender,e) does but the ai recmoends it and without it code does not work.  
+        {
+            flavor = flavorBox.Text;
+            SetFlavor();
+        };
+        TextBox toppingBox = new TextBox
+        {
+            Location = new Point(30, 140),
+            Size = new Size(200, 30), 
+            Text = "Enter topping",
+        };
+        Controls.Add(toppingBox);
+        Button setToppingButton = new Button
+        {
+            Location = new Point(30, 180),
+            Size = new Size(200, 30),
+            Text = "Set Topping"
+        };
+        Controls.Add(setToppingButton);
+        setToppingButton.Click += (sender, e) =>
+        {
+            topping = toppingBox.Text;
+            SetTopping();
+        };
     }
     private void Form1_Load(object? sender, EventArgs e)
     {
-        Setcone();
+        
     }
 }
