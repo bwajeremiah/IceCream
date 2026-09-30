@@ -1,6 +1,5 @@
 using MongoDB.Bson;
 namespace IceCream.Data;
-
 public class FlavorOpt
 {
     public ObjectId Id { get; set; }

@@ -5,7 +5,7 @@ public partial class Form1 : Form
 {
     MongoClient client = new MongoClient("mongodb+srv://bwajeremiah_db_user:39Firehouse@cluster0.hklay79.mongodb.net/?appName=Cluster0");
     string flavor = "Placeholder";
-     string topping = "Placeholder";
+    string topping = "Placeholder";
     void SetFlavor()
     {
         var database = client.GetDatabase("IceCream");
