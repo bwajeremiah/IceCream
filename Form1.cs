@@ -45,6 +45,33 @@ public partial class Form1 : Form
             Text = "Enter flavor",
         };
         Controls.Add(flavorBox);
+        Button showFlavorButton = new Button
+        {
+            Location = new Point(280, 100),
+            Size = new Size(200, 30),
+            Text = "Show Flavors"
+        };
+        Controls.Add(showFlavorButton);
+        showFlavorButton.Click += (sender, e) =>
+        {
+            try
+            {
+                var database = client.GetDatabase("IceCream");
+                var collection = database.GetCollection<FlavorOpt>("Flavors");
+                var flavors = collection.Find(_ => true).ToList()
+                    .Select(item => item.Flavor)
+                    .ToList();
+
+                var message = flavors.Count > 0
+                    ? string.Join(Environment.NewLine, flavors)
+                    : "No flavors found.";
+                MessageBox.Show(this, message, "All Flavors", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (MongoException exception)
+            {
+                MessageBox.Show(this, $"Unable to load flavors: {exception.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        };
         Button setFlavorButton = new Button
         {
             Location = new Point(30, 100),
