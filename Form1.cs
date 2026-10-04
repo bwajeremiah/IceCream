@@ -26,15 +26,19 @@ public partial class Form1 : Form
         };
         collection.InsertOne(document); 
     }
+    void StartOrder()
+    {
+        new Form2().Show(this);
+    }
     public Form1()
     {
         InitializeComponent();
         Load += Form1_Load;
         var Message = new Label
         {
-            Text = "Test Text",
-            AutoSize = true,
-            Location = new Point(30, 30),
+            Text = "Upload",
+            Size = new Size(200, 30),
+            Location = new Point(335, 30),
             Font = new Font("SansSerif", 16),
         };
         Controls.Add(Message);
@@ -47,7 +51,7 @@ public partial class Form1 : Form
         Controls.Add(flavorBox);
         Button showFlavorButton = new Button
         {
-            Location = new Point(280, 100),
+            Location = new Point(290, 100),
             Size = new Size(200, 30),
             Text = "Show Flavors"
         };
@@ -86,14 +90,14 @@ public partial class Form1 : Form
         };
         TextBox toppingBox = new TextBox
         {
-            Location = new Point(30, 140),
+            Location = new Point(570, 60),
             Size = new Size(200, 30), 
             Text = "Enter topping",
         };
         Controls.Add(toppingBox);
         Button setToppingButton = new Button
         {
-            Location = new Point(30, 180),
+            Location = new Point(570, 100),
             Size = new Size(200, 30),
             Text = "Set Topping"
         };
@@ -102,6 +106,17 @@ public partial class Form1 : Form
         {
             topping = toppingBox.Text;
             SetTopping();
+        };
+        Button OrderButton = new Button
+        {
+          Location = new Point(290,200),
+          Size = new Size(200,30),
+          Text = "Start Order"
+        };
+        Controls.Add(OrderButton);
+        OrderButton.Click += (sender, e) =>
+        {
+            StartOrder();
         };
     }
     private void Form1_Load(object? sender, EventArgs e)
