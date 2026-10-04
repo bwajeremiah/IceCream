@@ -22,3 +22,5 @@ C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\refint\IceCre
 C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.pdb
 C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.genruntimeconfig.cache
 C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\ref\IceCream.dll
+C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.Form1.resources
+C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.csproj.GenerateResource.cache
