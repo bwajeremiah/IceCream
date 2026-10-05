@@ -24,3 +24,7 @@ C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.genr
 C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\ref\IceCream.dll
 C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.Form1.resources
 C:\Users\newje\Documents\GitHub\IceCream\obj\Debug\net10.0-windows\IceCream.csproj.GenerateResource.cache
+C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.deps.json
+C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.runtimeconfig.json
+C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.dll
+C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.pdb

@@ -169,7 +169,7 @@ public partial class Form1 : Form
         Controls.Add(flavorBox);
         Button showFlavorButton = new Button
         {
-            Location = new Point(290, 100),
+            Location = new Point(30,140),
             Size = new Size(200, 30),
             Text = "Show Flavors"
         };
@@ -192,6 +192,33 @@ public partial class Form1 : Form
             catch (MongoException exception)
             {
                 MessageBox.Show(this, $"Unable to load flavors: {exception.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        };
+         Button showToppingButton = new Button
+        {
+            Location = new Point(570,140),
+            Size = new Size(200, 30),
+            Text = "Show Toppings"
+        };
+        Controls.Add(showToppingButton);
+        showToppingButton.Click += (sender, e) =>
+        {
+            try
+            {
+                var database = client.GetDatabase("IceCream");
+                var collection = database.GetCollection<ToppingOpt>("Toppings");
+                var toppings = collection.Find(_ => true).ToList()
+                    .Select(item => item.Topping)
+                    .ToList();
+
+                var message = toppings.Count > 0
+                    ? string.Join(Environment.NewLine, toppings)
+                    : "No toppings found.";
+                MessageBox.Show(this, message, "All Toppings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (MongoException exception)
+            {
+                MessageBox.Show(this, $"Unable to load toppings: {exception.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         };
         Button setFlavorButton = new Button
