@@ -228,7 +228,7 @@ public partial class Form1 : Form
             Text = "Set Flavor"
         };
         Controls.Add(setFlavorButton);
-        setFlavorButton.Click += (sender, e) => // i dont know what  "(sender,e) does but the ai recmoends it and without it code does not work.  
+        setFlavorButton.Click += (sender, e) => 
         {
             flavor = flavorBox.Text;
             SetFlavor();
