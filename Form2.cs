@@ -7,32 +7,7 @@ public partial class Form2 : Form
     string FlavorChosen = "placeholder";
     string ToppingChosen = "placeholder";
     ComboBox OrderFlavor;
-    private void LoadComboBoxData()
-        {
-            try
-            {
-
-                // Get database and collection
-                var database = client.GetDatabase("IceCream");
-                var collection = database.GetCollection<FlavorOpt>("Flavors");
-                // Fetch all documents
-                var documents = collection.Find(new FlavorOpt()).ToList();
-                OrderFlavor.Items.Clear();
-                foreach (var doc in documents)
-                {
-                    if (doc.Contains("Flavor") && doc["Flavor"].IsString)
-                    {
-                        OrderFlavor.Items.Add(doc["Flavor"].AsString);
-                    }
-                }
-            }
-                catch (MongoConnectionException ex)
-                {
-                MessageBox.Show($"Error connecting to MongoDB: {ex.Message}", "Connection Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-        }
-        
+  
 
     public Form2()
     {
