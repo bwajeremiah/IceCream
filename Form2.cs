@@ -28,12 +28,58 @@ public partial class Form2 : Form
     TextBox DisplayToppingChoice4;
     ComboBox OrderTopping5;
     TextBox DisplayToppingChoice5;
+    void SetFlavorChoice()
+    {
+        if (OrderFlavor is null)
+        {
+            return;
+        }
+
+        var database = client.GetDatabase("IceCream");
+        var collection = database.GetCollection<FlavorOpt>("Flavors");
+        var flavors = collection.Find(_ => true).ToList();
+        foreach (var flavor in flavors)
+        {
+            OrderFlavor.Items.Add(flavor.Flavor);
+        }
+    }
+    void SetToppingChoice()
+    {
+        if (OrderTopping1 is null || OrderTopping2 is null || OrderTopping3 is null || OrderTopping4 is null || OrderTopping5 is null)
+        {
+            return;
+        }
+
+        var database = client.GetDatabase("IceCream");
+        var collection = database.GetCollection<ToppingOpt>("Toppings");
+        var toppings = collection.Find(_ => true).ToList();
+        foreach (var topping in toppings)
+        {
+            OrderTopping1.Items.Add(topping.Topping);
+            OrderTopping2.Items.Add(topping.Topping);
+            OrderTopping3.Items.Add(topping.Topping);
+            OrderTopping4.Items.Add(topping.Topping);
+            OrderTopping5.Items.Add(topping.Topping);
+        }
+    }
     
     public Form2()
     {
         InitializeComponent();
         Load += Form2_Load;
-        
+
+        OrderFlavor = new ComboBox
+        {
+            Location = new Point(30, 100),
+            Size = new Size(200, 30),
+            DropDownStyle = ComboBoxStyle.DropDownList,
+            DropDownWidth = 400,
+        };
+        Controls.Add(OrderFlavor);
+        OrderFlavor.SelectedIndexChanged += OrderFlavor_SelectedIndexChanged;
+
+        SetFlavorChoice();
+
         var Message = new Label
         {
             Text = "Order",
@@ -95,7 +141,8 @@ public partial class Form2 : Form
             OrderTopping1.Location = new Point(30, 340);
             OrderTopping1.Size = new Size(200, 30);
             OrderTopping1.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
+            OrderTopping1.DropDownWidth = 400;
+        }   
        
         Controls.Add(OrderTopping1);
         OrderTopping1.SelectedIndexChanged += OrderTopping1_SelectedIndexChanged;
@@ -105,6 +152,7 @@ public partial class Form2 : Form
             OrderTopping2.Location = new Point(570, 100);
             OrderTopping2.Size = new Size(200, 30);
             OrderTopping2.DropDownStyle = ComboBoxStyle.DropDownList;
+            OrderTopping2.DropDownWidth = 400;
         }   
         Controls.Add(OrderTopping2);
         OrderTopping2.SelectedIndexChanged += OrderTopping2_SelectedIndexChanged;
@@ -114,6 +162,7 @@ public partial class Form2 : Form
             OrderTopping3.Location = new Point(570, 180);
             OrderTopping3.Size = new Size(200, 30);
             OrderTopping3.DropDownStyle = ComboBoxStyle.DropDownList;
+            OrderTopping3.DropDownWidth = 400;
         }
         Controls.Add(OrderTopping3);
         OrderTopping3.SelectedIndexChanged += OrderTopping3_SelectedIndexChanged;
@@ -123,6 +172,7 @@ public partial class Form2 : Form
             OrderTopping4.Location = new Point(570, 260);
             OrderTopping4.Size = new Size(200, 30);
             OrderTopping4.DropDownStyle = ComboBoxStyle.DropDownList;
+            OrderTopping4.DropDownWidth = 400;
         }
         Controls.Add(OrderTopping4);
         OrderTopping4.SelectedIndexChanged += OrderTopping4_SelectedIndexChanged;
@@ -132,15 +182,17 @@ public partial class Form2 : Form
             OrderTopping5.Location = new Point(570, 340);
             OrderTopping5.Size = new Size(200, 30);
             OrderTopping5.DropDownStyle = ComboBoxStyle.DropDownList;
+            OrderTopping5.DropDownWidth = 400;
         }  
         Controls.Add(OrderTopping5);
         OrderTopping5.SelectedIndexChanged += OrderTopping5_SelectedIndexChanged;
         DisplayToppingChoice5.Text = ToppingChosen5;
         OrderCone = new ComboBox();
         {
-        OrderCone.Location = new Point(30, 260);
-        OrderCone.Size = new Size(200, 30);
-        OrderCone.DropDownStyle = ComboBoxStyle.DropDownList;
+            OrderCone.Location = new Point(30, 260);
+            OrderCone.Size = new Size(200, 30);
+            OrderCone.DropDownStyle = ComboBoxStyle.DropDownList;
+            OrderCone.DropDownWidth = 400;
         }
         OrderCone.Items.Add("SprinkeledWaffleCone");
         OrderCone.Items.Add("ChocolateDippedWaffleCone");
@@ -166,15 +218,8 @@ public partial class Form2 : Form
         Controls.Add(OrderSize);
         OrderSize.SelectedIndexChanged += OrderSize_SelectedIndexChanged;
         DisplaySizeChoice.Text = SizeChosen;
-        OrderFlavor = new ComboBox();
-        {
-        OrderFlavor.Location = new Point(30,100);
-        OrderFlavor.Size = new Size(200,30);
-        OrderFlavor.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
-        Controls.Add(OrderFlavor);
-        OrderFlavor.SelectedIndexChanged += OrderFlavor_SelectedIndexChanged;
         DisplayFlavorChoice.Text = FlavorChosen;
+        SetToppingChoice();
     }
         private void OrderFlavor_SelectedIndexChanged(object? sender, EventArgs e)
         {
@@ -205,7 +250,7 @@ public partial class Form2 : Form
             if (OrderTopping1.SelectedItem is string selectedTopping1)
             {
                 ToppingChosen1 = selectedTopping1;
-                DisplayToppingChoice1.Text = "Free" + ToppingChosen1;
+                DisplayToppingChoice1.Text = "Free: " + ToppingChosen1;
             }
         }
         private void OrderTopping2_SelectedIndexChanged(object? sender, EventArgs e)
