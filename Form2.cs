@@ -343,10 +343,6 @@ public partial class Form2 : Form
                 DisplayToppingChoice5.Text = "5:" + ToppingChosen5;
             }
         }
-        double CalculateTotalPrice(UserOrder order)
-        {
-            // Implementation for calculating total price
-        }
         void CalculateUserOrder()
         {
             UserOrder order = new UserOrder
@@ -360,7 +356,7 @@ public partial class Form2 : Form
                 Topping4 = ToppingChosen4,
                 Topping5 = ToppingChosen5,
             };
-            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{SizeChosen}{Environment.NewLine}{ConeChosen}{Environment.NewLine}{ToppingChosen1}{Environment.NewLine}{ToppingChosen2}{Environment.NewLine}{ToppingChosen3}{Environment.NewLine}{ToppingChosen4}{Environment.NewLine}{ToppingChosen5}{Environment.NewLine}{"total price is: $" + order.TotalPrice.ToString("0.00")}"););
+            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{SizeChosen}{Environment.NewLine}{ConeChosen}{Environment.NewLine}{ToppingChosen1}{Environment.NewLine}{ToppingChosen2}{Environment.NewLine}{ToppingChosen3}{Environment.NewLine}{ToppingChosen4}{Environment.NewLine}{ToppingChosen5}{Environment.NewLine}{"total price is: $"}");
         }
 
      private void Form2_Load(object? sender, EventArgs e)
