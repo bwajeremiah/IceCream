@@ -1,6 +1,8 @@
 namespace IceCream;
 using MongoDB.Driver;
 using IceCream.Data;
+using MongoDB.Driver.Linq;
+
 public partial class Form2 : Form
 {
     MongoClient client = new MongoClient("mongodb+srv://bwajeremiah_db_user:39Firehouse@cluster0.hklay79.mongodb.net/?appName=Cluster0");
@@ -12,6 +14,7 @@ public partial class Form2 : Form
     string? ToppingChosen3 = "3rd Topping";
     string? ToppingChosen4 = "4th Topping";
     string? ToppingChosen5 = "5th Topping";
+    Button CalculateOrder;
     ComboBox OrderFlavor;
     TextBox DisplayFlavorChoice;
     ComboBox OrderSize;
@@ -28,6 +31,18 @@ public partial class Form2 : Form
     TextBox DisplayToppingChoice4;
     ComboBox OrderTopping5;
     TextBox DisplayToppingChoice5;
+    public class UserOrder
+    {
+        public string? Flavor { get; set; }
+        public string? Size { get; set; }
+        public string? Cone { get; set; }
+        public string? Topping1 { get; set; }
+        public string? Topping2 { get; set; }
+        public string? Topping3 { get; set; }
+        public string? Topping4 { get; set; }
+        public string? Topping5 { get; set; }
+        public double TotalPrice { get; set; }
+    }
     void SetFlavorChoice()
     {
         if (OrderFlavor is null)
@@ -85,11 +100,14 @@ public partial class Form2 : Form
         var toppings = collection.Find(_ => true).ToList();
         foreach (var topping in toppings)
         {
+            var price = string.Equals(topping.Topping?.Trim(), "NO Mix IN", StringComparison.OrdinalIgnoreCase)
+                ? 0
+                : topping.Price;
             OrderTopping1.Items.Add(topping.Topping+" $0.00");
-            OrderTopping2.Items.Add(topping.Topping+" $"+topping.Price);
-            OrderTopping3.Items.Add(topping.Topping+" $"+topping.Price);
-            OrderTopping4.Items.Add(topping.Topping+" $"+topping.Price);
-            OrderTopping5.Items.Add(topping.Topping+" $"+topping.Price);
+            OrderTopping2.Items.Add($"{topping.Topping} ${price:0.00}");
+            OrderTopping3.Items.Add($"{topping.Topping} ${price:0.00}");
+            OrderTopping4.Items.Add($"{topping.Topping} ${price:0.00}");
+            OrderTopping5.Items.Add($"{topping.Topping} ${price:0.00}");
         }
     }
     
@@ -122,48 +140,56 @@ public partial class Form2 : Form
         {
             Location = new Point(30, 60),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayFlavorChoice);
         DisplaySizeChoice = new TextBox
         {
             Location = new Point(30, 140),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplaySizeChoice);
         DisplayConeChoice = new TextBox
         {
             Location = new Point(30, 220),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayConeChoice);
         DisplayToppingChoice1 = new TextBox
         {
             Location = new Point(30, 300),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayToppingChoice1);
         DisplayToppingChoice2 = new TextBox
         {
             Location = new Point(570, 60),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayToppingChoice2);
         DisplayToppingChoice3 = new TextBox
         {
             Location = new Point(570, 140),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayToppingChoice3);
         DisplayToppingChoice4 = new TextBox
         {
             Location = new Point(570, 220),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayToppingChoice4);
         DisplayToppingChoice5 = new TextBox
         {
             Location = new Point(570, 300),
             Size = new Size(200, 30),
+            ReadOnly = true,
         };
         Controls.Add(DisplayToppingChoice5);
         OrderTopping1 = new ComboBox();
@@ -241,63 +267,102 @@ public partial class Form2 : Form
         DisplaySizeChoice.Text = SizeChosen;
         DisplayFlavorChoice.Text = FlavorChosen;
         SetToppingChoice();
+        CalculateOrder = new Button
+        {
+            Location = new Point(325, 380),
+            Size = new Size(150, 30),
+            Text = "Calculate Order"
+        };
+        Controls.Add(CalculateOrder);
+        CalculateOrder.Click += (sender, e) =>
+        {
+            CalculateUserOrder();
+        };
     }
         private void OrderFlavor_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderFlavor.SelectedItem is string selectedFlavor)
             {
-                DisplayFlavorChoice.Text = "You Chose: " + selectedFlavor;
+                FlavorChosen = selectedFlavor;
+                DisplayFlavorChoice.Text = "You Chose: " + FlavorChosen;
             }
         }
         private void OrderSize_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderSize.SelectedItem is string selectedSize)
             {
-                DisplaySizeChoice.Text = "You Chose: " + selectedSize;
+                SizeChosen = selectedSize;
+                DisplaySizeChoice.Text = "You Chose: " + SizeChosen;
             }
         }
         private void OrderCone_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderCone.SelectedItem is string selectedCone)
             {
-                DisplayConeChoice.Text = selectedCone;
+                ConeChosen = selectedCone;
+                DisplayConeChoice.Text = "You Chose: " + ConeChosen;
             }
         }
         private void OrderTopping1_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping1.SelectedItem is string selectedTopping1)
             {
-                DisplayToppingChoice1.Text = "Free: " + selectedTopping1;
+                ToppingChosen1 = selectedTopping1;
+                DisplayToppingChoice1.Text = "Free: " + ToppingChosen1;
             }
         }
         private void OrderTopping2_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping2.SelectedItem is string selectedTopping2)
             {
-                DisplayToppingChoice2.Text = "2:" + selectedTopping2;
+                ToppingChosen2 = selectedTopping2;
+                DisplayToppingChoice2.Text = "2:" + ToppingChosen2;
             }
         }
         private void OrderTopping3_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping3.SelectedItem is string selectedTopping3)
             {
-                DisplayToppingChoice3.Text = "3:" + selectedTopping3;
+                ToppingChosen3 = selectedTopping3;
+                DisplayToppingChoice3.Text = "3:" + ToppingChosen3;
             }
         }
         private void OrderTopping4_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping4.SelectedItem is string selectedTopping4)
             {
-                DisplayToppingChoice4.Text = "4:" + selectedTopping4;
+                ToppingChosen4 = selectedTopping4;
+                DisplayToppingChoice4.Text = "4:" + ToppingChosen4;
             }
         }
         private void OrderTopping5_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping5.SelectedItem is string selectedTopping5)
             {
-                DisplayToppingChoice5.Text = "5:" + selectedTopping5;
+                ToppingChosen5 = selectedTopping5;
+                DisplayToppingChoice5.Text = "5:" + ToppingChosen5;
             }
         }
+        double CalculateTotalPrice(UserOrder order)
+        {
+            // Implementation for calculating total price
+        }
+        void CalculateUserOrder()
+        {
+            UserOrder order = new UserOrder
+            {
+                Flavor = FlavorChosen,
+                Size = SizeChosen,
+                Cone = ConeChosen,
+                Topping1 = ToppingChosen1,
+                Topping2 = ToppingChosen2,
+                Topping3 = ToppingChosen3,
+                Topping4 = ToppingChosen4,
+                Topping5 = ToppingChosen5,
+            };
+            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{SizeChosen}{Environment.NewLine}{ConeChosen}{Environment.NewLine}{ToppingChosen1}{Environment.NewLine}{ToppingChosen2}{Environment.NewLine}{ToppingChosen3}{Environment.NewLine}{ToppingChosen4}{Environment.NewLine}{ToppingChosen5}{Environment.NewLine}{"total price is: $" + order.TotalPrice.ToString("0.00")}"););
+        }
+
      private void Form2_Load(object? sender, EventArgs e)
     {
     

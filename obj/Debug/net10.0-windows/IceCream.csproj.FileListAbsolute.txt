@@ -28,3 +28,8 @@ C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.deps.json
 C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.runtimeconfig.json
 C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.dll
 C:\Users\newje\AppData\Local\Temp\IceCream-build-check\IceCream.pdb
+C:\Users\newje\AppData\Local\Temp\IceCream-build\IceCream.exe
+C:\Users\newje\AppData\Local\Temp\IceCream-build\IceCream.deps.json
+C:\Users\newje\AppData\Local\Temp\IceCream-build\IceCream.runtimeconfig.json
+C:\Users\newje\AppData\Local\Temp\IceCream-build\IceCream.dll
+C:\Users\newje\AppData\Local\Temp\IceCream-build\IceCream.pdb
