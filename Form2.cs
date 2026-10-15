@@ -43,6 +43,36 @@ public partial class Form2 : Form
             OrderFlavor.Items.Add(flavor.Flavor);
         }
     }
+    void SetSizeChoice()
+    {
+        if (OrderSize is null)
+        {
+            return;
+        }
+
+        var database = client.GetDatabase("IceCream");
+        var collection = database.GetCollection<SizePrice>("Sizes");
+        var sizes = collection.Find(_ => true).ToList();
+        foreach (var size in sizes)
+        {
+            OrderSize.Items.Add(size.Size+" $"+size.Price);
+        }
+    }
+    void SetConeChoice()
+    {
+        if (OrderCone is null)
+        {
+            return;
+        }
+
+        var database = client.GetDatabase("IceCream");
+        var collection = database.GetCollection<ConePrices>("Cones");
+        var cones = collection.Find(_ => true).ToList();
+        foreach (var cone in cones)
+        {
+            OrderCone.Items.Add(cone.ConeType+" $"+cone.Price);
+        }
+    }
     void SetToppingChoice()
     {
         if (OrderTopping1 is null || OrderTopping2 is null || OrderTopping3 is null || OrderTopping4 is null || OrderTopping5 is null)
@@ -55,11 +85,11 @@ public partial class Form2 : Form
         var toppings = collection.Find(_ => true).ToList();
         foreach (var topping in toppings)
         {
-            OrderTopping1.Items.Add(topping.Topping);
-            OrderTopping2.Items.Add(topping.Topping);
-            OrderTopping3.Items.Add(topping.Topping);
-            OrderTopping4.Items.Add(topping.Topping);
-            OrderTopping5.Items.Add(topping.Topping);
+            OrderTopping1.Items.Add(topping.Topping+" $0.00");
+            OrderTopping2.Items.Add(topping.Topping+" $"+topping.Price);
+            OrderTopping3.Items.Add(topping.Topping+" $"+topping.Price);
+            OrderTopping4.Items.Add(topping.Topping+" $"+topping.Price);
+            OrderTopping5.Items.Add(topping.Topping+" $"+topping.Price);
         }
     }
     
@@ -194,13 +224,7 @@ public partial class Form2 : Form
             OrderCone.DropDownStyle = ComboBoxStyle.DropDownList;
             OrderCone.DropDownWidth = 400;
         }
-        OrderCone.Items.Add("SprinkeledWaffleCone");
-        OrderCone.Items.Add("ChocolateDippedWaffleCone");
-        OrderCone.Items.Add("SprinkeledWaffleBowl");
-        OrderCone.Items.Add("ChocolateDippedWaffleBowl");
-        OrderCone.Items.Add("PlainWaffleCone");
-        OrderCone.Items.Add("PlainWaffleBowl");    
-        OrderCone.Items.Add("NoConeOrBowl(Paperbowl)");
+        SetConeChoice();
         Controls.Add(OrderCone);
         OrderCone.SelectedIndexChanged += OrderCone_SelectedIndexChanged;
         DisplayConeChoice.Text = ConeChosen;
@@ -211,11 +235,8 @@ public partial class Form2 : Form
         OrderSize.Size = new Size(200,30);
         OrderSize.DropDownStyle = ComboBoxStyle.DropDownList;
         }
-        OrderSize.Items.Add("Mini");
-        OrderSize.Items.Add("Small");
-        OrderSize.Items.Add("Medium");
-        OrderSize.Items.Add("Large");
         Controls.Add(OrderSize);
+        SetSizeChoice();
         OrderSize.SelectedIndexChanged += OrderSize_SelectedIndexChanged;
         DisplaySizeChoice.Text = SizeChosen;
         DisplayFlavorChoice.Text = FlavorChosen;
@@ -225,64 +246,56 @@ public partial class Form2 : Form
         {
             if (OrderFlavor.SelectedItem is string selectedFlavor)
             {
-                FlavorChosen = selectedFlavor;
-                DisplayFlavorChoice.Text = "You Chose: " + FlavorChosen;
+                DisplayFlavorChoice.Text = "You Chose: " + selectedFlavor;
             }
         }
         private void OrderSize_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderSize.SelectedItem is string selectedSize)
             {
-                SizeChosen = selectedSize;
-                DisplaySizeChoice.Text = "You Chose: " + SizeChosen;
+                DisplaySizeChoice.Text = "You Chose: " + selectedSize;
             }
         }
         private void OrderCone_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderCone.SelectedItem is string selectedCone)
             {
-                ConeChosen = selectedCone;
-                DisplayConeChoice.Text = ConeChosen;
+                DisplayConeChoice.Text = selectedCone;
             }
         }
         private void OrderTopping1_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping1.SelectedItem is string selectedTopping1)
             {
-                ToppingChosen1 = selectedTopping1;
-                DisplayToppingChoice1.Text = "Free: " + ToppingChosen1;
+                DisplayToppingChoice1.Text = "Free: " + selectedTopping1;
             }
         }
         private void OrderTopping2_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping2.SelectedItem is string selectedTopping2)
             {
-                ToppingChosen2 = selectedTopping2;
-                DisplayToppingChoice2.Text = "2:" + ToppingChosen2;
+                DisplayToppingChoice2.Text = "2:" + selectedTopping2;
             }
         }
         private void OrderTopping3_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping3.SelectedItem is string selectedTopping3)
             {
-                ToppingChosen3 = selectedTopping3;
-                DisplayToppingChoice3.Text = "3:" + ToppingChosen3;
+                DisplayToppingChoice3.Text = "3:" + selectedTopping3;
             }
         }
         private void OrderTopping4_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping4.SelectedItem is string selectedTopping4)
             {
-                ToppingChosen4 = selectedTopping4;
-                DisplayToppingChoice4.Text = "4:" + ToppingChosen4;
+                DisplayToppingChoice4.Text = "4:" + selectedTopping4;
             }
         }
         private void OrderTopping5_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (OrderTopping5.SelectedItem is string selectedTopping5)
             {
-                ToppingChosen5 = selectedTopping5;
-                DisplayToppingChoice5.Text = "5:" + ToppingChosen5;
+                DisplayToppingChoice5.Text = "5:" + selectedTopping5;
             }
         }
      private void Form2_Load(object? sender, EventArgs e)
