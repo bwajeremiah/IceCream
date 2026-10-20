@@ -31,18 +31,6 @@ public partial class Form2 : Form
     TextBox DisplayToppingChoice4;
     ComboBox OrderTopping5;
     TextBox DisplayToppingChoice5;
-    public class UserOrder
-    {
-        public string? Flavor { get; set; }
-        public string? Size { get; set; }
-        public string? Cone { get; set; }
-        public string? Topping1 { get; set; }
-        public string? Topping2 { get; set; }
-        public string? Topping3 { get; set; }
-        public string? Topping4 { get; set; }
-        public string? Topping5 { get; set; }
-        public double TotalPrice { get; set; }
-    }
     void SetFlavorChoice()
     {
         if (OrderFlavor is null)
@@ -337,18 +325,15 @@ public partial class Form2 : Form
         }
         void CalculateUserOrder()
         {
-            UserOrder order = new UserOrder
-            {
-                Flavor = FlavorChosen,
-                Size = SizeChosen,
-                Cone = ConeChosen,
-                Topping1 = ToppingChosen1,
-                Topping2 = ToppingChosen2,
-                Topping3 = ToppingChosen3,
-                Topping4 = ToppingChosen4,
-                Topping5 = ToppingChosen5,
-            };
-            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{SizeChosen}{Environment.NewLine}{ConeChosen}{Environment.NewLine}{ToppingChosen1}{Environment.NewLine}{ToppingChosen2}{Environment.NewLine}{ToppingChosen3}{Environment.NewLine}{ToppingChosen4}{Environment.NewLine}{ToppingChosen5}{Environment.NewLine}{"total price is: $"}");
+            double sizeSelectedPrice = OrderSize.SelectedItem is KeyValuePair<string, double> sizeSelected ? sizeSelected.Value : 0;
+            double coneSelectedPrice = OrderCone.SelectedItem is KeyValuePair<string?, double> coneSelected ? coneSelected.Value : 0;
+            double topping1SelectedPrice = OrderTopping1.SelectedItem is KeyValuePair<string?, double> topping1Selected ? topping1Selected.Value : 0;
+            double topping2SelectedPrice = OrderTopping2.SelectedItem is KeyValuePair<string?, double> topping2Selected ? topping2Selected.Value : 0;
+            double topping3SelectedPrice = OrderTopping3.SelectedItem is KeyValuePair<string?, double> topping3Selected ? topping3Selected.Value : 0;
+            double topping4SelectedPrice = OrderTopping4.SelectedItem is KeyValuePair<string?,  double> topping4Selected ? topping4Selected.Value : 0;
+            double topping5SelectedPrice = OrderTopping5.SelectedItem is KeyValuePair<string?,  double> topping5Selected ? topping5Selected.Value : 0;
+            double totalPrice = sizeSelectedPrice + coneSelectedPrice + topping1SelectedPrice + topping2SelectedPrice + topping3SelectedPrice + topping4SelectedPrice + topping5SelectedPrice;
+            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{ OrderSize.SelectedItem}{Environment.NewLine}{OrderCone.SelectedItem}{Environment.NewLine}{OrderTopping1.SelectedItem}{Environment.NewLine}{OrderTopping2.SelectedItem}{Environment.NewLine}{OrderTopping3.SelectedItem}{Environment.NewLine}{OrderTopping4.SelectedItem}{Environment.NewLine}{OrderTopping5.SelectedItem}{Environment.NewLine}{"total price is: $"}");
         }
 
      private void Form2_Load(object? sender, EventArgs e)
