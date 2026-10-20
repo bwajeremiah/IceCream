@@ -60,18 +60,10 @@ public partial class Form2 : Form
     }
     void SetSizeChoice()
     {
-        if (OrderSize is null)
-        {
-            return;
-        }
-
-        var database = client.GetDatabase("IceCream");
-        var collection = database.GetCollection<SizePrice>("Sizes");
-        var sizes = collection.Find(_ => true).ToList();
-        foreach (var size in sizes)
-        {
-            OrderSize.Items.Add(size.Size+" $"+size.Price);
-        }
+        OrderSize.Items.Add(new KeyValuePair<string, double>("Mini", 4.50));
+        OrderSize.Items.Add(new KeyValuePair<string, double>("Small", 7.50));
+        OrderSize.Items.Add(new KeyValuePair<string, double>("Medium", 8.50));
+        OrderSize.Items.Add(new KeyValuePair<string, double>("Large", 9.50));
     }
     void SetConeChoice()
     {
@@ -85,7 +77,7 @@ public partial class Form2 : Form
         var cones = collection.Find(_ => true).ToList();
         foreach (var cone in cones)
         {
-            OrderCone.Items.Add(cone.ConeType+" $"+cone.Price);
+            OrderCone.Items.Add(new KeyValuePair<string?, double>(cone.ConeType, cone.Price));
         }
     }
     void SetToppingChoice()
@@ -103,11 +95,11 @@ public partial class Form2 : Form
             var price = string.Equals(topping.Topping?.Trim(), "NO Mix IN", StringComparison.OrdinalIgnoreCase)
                 ? 0
                 : topping.Price;
-            OrderTopping1.Items.Add(topping.Topping+" $0.00");
-            OrderTopping2.Items.Add($"{topping.Topping} ${price:0.00}");
-            OrderTopping3.Items.Add($"{topping.Topping} ${price:0.00}");
-            OrderTopping4.Items.Add($"{topping.Topping} ${price:0.00}");
-            OrderTopping5.Items.Add($"{topping.Topping} ${price:0.00}");
+            OrderTopping1.Items.Add(new KeyValuePair<string?, double>(topping.Topping, topping.Price));
+            OrderTopping2.Items.Add(new KeyValuePair<string?, double>(topping.Topping, topping.Price));
+            OrderTopping3.Items.Add(new KeyValuePair<string?, double>(topping.Topping, topping.Price));
+            OrderTopping4.Items.Add(new KeyValuePair<string?, double>(topping.Topping, topping.Price));
+            OrderTopping5.Items.Add(new KeyValuePair<string?, double>(topping.Topping, topping.Price));
         }
     }
     

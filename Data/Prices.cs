@@ -10,7 +10,7 @@ public class ToppingOpt
 {
     public ObjectId Id { get; set; }
     public string? Topping { get; set; }
-    public double Price  = 1.49;
+    public double Price { get; set; }
 }
 public class SizePrice
 {
