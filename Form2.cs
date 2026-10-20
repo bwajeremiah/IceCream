@@ -333,7 +333,7 @@ public partial class Form2 : Form
             double topping4SelectedPrice = OrderTopping4.SelectedItem is KeyValuePair<string?,  double> topping4Selected ? topping4Selected.Value : 0;
             double topping5SelectedPrice = OrderTopping5.SelectedItem is KeyValuePair<string?,  double> topping5Selected ? topping5Selected.Value : 0;
             double totalPrice = sizeSelectedPrice + coneSelectedPrice + topping1SelectedPrice + topping2SelectedPrice + topping3SelectedPrice + topping4SelectedPrice + topping5SelectedPrice;
-            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{ OrderSize.SelectedItem}{Environment.NewLine}{OrderCone.SelectedItem}{Environment.NewLine}{OrderTopping1.SelectedItem}{Environment.NewLine}{OrderTopping2.SelectedItem}{Environment.NewLine}{OrderTopping3.SelectedItem}{Environment.NewLine}{OrderTopping4.SelectedItem}{Environment.NewLine}{OrderTopping5.SelectedItem}{Environment.NewLine}{"total price is: $"}");
+            MessageBox.Show($"Your Order is: {Environment.NewLine}{FlavorChosen}{Environment.NewLine}{ OrderSize.SelectedItem}{Environment.NewLine}{OrderCone.SelectedItem}{Environment.NewLine}{OrderTopping1.SelectedItem}{Environment.NewLine}{OrderTopping2.SelectedItem}{Environment.NewLine}{OrderTopping3.SelectedItem}{Environment.NewLine}{OrderTopping4.SelectedItem}{Environment.NewLine}{OrderTopping5.SelectedItem}{Environment.NewLine}{"total price is: $"}{totalPrice}");
         }
 
      private void Form2_Load(object? sender, EventArgs e)
